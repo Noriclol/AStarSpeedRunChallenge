@@ -56,24 +56,25 @@ public class Grid : MonoBehaviour
     // Visualization
     public void OnDrawGizmos()
     {
-        Gizmos.color = Color.blue;
-        Gizmos.DrawWireCube(transform.position, new Vector3(gridWorldSize.x, 1, gridWorldSize.y));
-        
-        //i wan
-        Vector3 flat = new Vector3(1f, 0.3f, 1f);
-
-
-        Node startNode = GetNodeFromPos(start.position);
-        Node endNode = GetNodeFromPos(end.position);
-        
-        
         // If Instantiated
         if (Instance != null)
+            
+            
+            Gizmos.color = Color.blue;
+            Gizmos.DrawWireCube(transform.position, new Vector3(gridWorldSize.x, 1, gridWorldSize.y));
+        
+            //i wan
+            Vector3 flat = new Vector3(1f, 0.3f, 1f);
+
+
+            Node startNode = GetNodeFromPos(start.position);
+            Node endNode = GetNodeFromPos(end.position);
+            
             foreach (var node in Instance)
             {
                 // Turnary for if passable/obstructed
                 Gizmos.color = (node.Passable)?mPassable.color:mObstructed.color;
-
+            
                 
                 // Path Node
                 if (Path != null && Path.Contains(node))
@@ -108,12 +109,12 @@ public class Grid : MonoBehaviour
 
 
 
-    public Node GetNodeFromPos(Vector3 position_)
+    public Node GetNodeFromPos(Vector3 position)
     {
         Vector2 percent = new Vector2()
         {
-            x = (position_.x + gridWorldSize.x/2) / gridWorldSize.x,
-            y = (position_.z + gridWorldSize.y/2) / gridWorldSize.y
+            x = (position.x + gridWorldSize.x/2) / gridWorldSize.x,
+            y = (position.z + gridWorldSize.y/2) / gridWorldSize.y
         };
         percent.x = Mathf.Clamp01(percent.x);
         percent.y = Mathf.Clamp01(percent.y);
@@ -123,8 +124,11 @@ public class Grid : MonoBehaviour
             x = Mathf.RoundToInt((GridSize.x - 1) * percent.x),
             y = Mathf.RoundToInt((GridSize.y - 1) * percent.y)
         };
-        
-        return Instance[index.x, index.y];
+
+        if (Instance[index.x, index.y] != null)
+            return Instance[index.x, index.y];
+
+        return null;
     }
 
     public List<Node> GetNeighbours(Node node_)

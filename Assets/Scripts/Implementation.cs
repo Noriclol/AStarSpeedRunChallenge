@@ -76,12 +76,12 @@ public class Implementation : MonoBehaviour
         }
     }
 
-    void RetracePath(Node start_, Node end_)
+    void RetracePath(Node start, Node end)
     {
         List<Node> path = new List<Node>();
-        Node current = end_;
+        Node current = end;
 
-        while (current != start_)
+        while (current != start)
         {
             path.Add(current);
             current = current.Parent;
@@ -91,10 +91,10 @@ public class Implementation : MonoBehaviour
     }
     
 
-    public int GetDistance(Node a_, Node b_)
+    public int GetDistance(Node a, Node b)
     {
-        Vector2Int aPos = a_.GridPosition;
-        Vector2Int bPos = b_.GridPosition;
+        Vector2Int aPos = a.GridPosition;
+        Vector2Int bPos = b.GridPosition;
 
         Vector2Int delta = new Vector2Int()
         {

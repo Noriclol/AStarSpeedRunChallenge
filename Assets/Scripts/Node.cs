@@ -14,11 +14,11 @@ public class Node
     public Node Parent;
     
 
-    public Node(Vector3 worldPosition_,Vector2Int gridPosition_, bool passable_)
+    public Node(Vector3 worldPosition,Vector2Int gridPosition, bool passable)
     {
-        WorldPosition = worldPosition_;
-        GridPosition = gridPosition_;
-        Passable = passable_;
+        WorldPosition = worldPosition;
+        GridPosition = gridPosition;
+        Passable = passable;
     }
 
     public int F
